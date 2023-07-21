@@ -1,28 +1,33 @@
-import "./globals.css";
-import type { Metadata } from "next";
+import "./globals.css"
+import type { Metadata } from "next"
 
-import { Lexend } from "next/font/google";
-import Sidebar from "@/components/Sidebar";
-import SupabaseProvider from "@/providers/SupabaseProvider";
-import UserProvider from "@/providers/UserProvider";
-import ModalProvider from "@/providers/ModalProvider";
-import ToasterProvider from "@/providers/ToasterProvider";
+import { Lexend } from "next/font/google"
+import Sidebar from "@/components/Sidebar"
+import SupabaseProvider from "@/providers/SupabaseProvider"
+import UserProvider from "@/providers/UserProvider"
+import ModalProvider from "@/providers/ModalProvider"
+import ToasterProvider from "@/providers/ToasterProvider"
+import getSongByUserId from "@/action/getSongsByUserId"
 
-const font = Lexend({ subsets: ["latin"] });
+const font = Lexend({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "SOUND ON",
   description: `Let's the music loud with SOUND ON`,
   icons: {
-    icon: "/sound-on-dark.png",
+    icon: "sound-on/public/images/sound-on-dark.png",
   },
-};
+}
 
-export default function RootLayout({
+const revalidate = 60
+
+export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
+  const userSong = await getSongByUserId()
+
   return (
     <html lang="en">
       <body className={font.className}>
@@ -30,10 +35,10 @@ export default function RootLayout({
         <SupabaseProvider>
           <UserProvider>
             <ModalProvider />
-            <Sidebar>{children}</Sidebar>
+            <Sidebar songs={userSong}>{children}</Sidebar>
           </UserProvider>
         </SupabaseProvider>
       </body>
     </html>
-  );
+  )
 }

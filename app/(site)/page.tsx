@@ -1,7 +1,16 @@
-import Header from "@/components/Header";
-import ListItem from "@/components/ListItem";
+import getSongs from "@/action/getSongs"
+import Header from "@/components/Header"
+import ListItem from "@/components/ListItem"
+import PageContent from "./components/PageContent"
 
-export default function Home() {
+//This page has always up to date
+const revalidate = 60
+////
+
+export default async function Home() {
+  // after create action/getSong.ts
+  const songs = await getSongs()
+
   return (
     <div className="bg-neutral-900 rounded-lg h-full w-full overflow-x-hidden overflow-y-auto ">
       <Header>
@@ -20,8 +29,8 @@ export default function Home() {
         <div className="flex items-center justify-between">
           <h1 className="text-white text-2xl font-semibold">Newest Songs</h1>
         </div>
-        <div>List of songs!</div>
+        <PageContent songs={songs} />
       </div>
     </div>
-  );
+  )
 }
