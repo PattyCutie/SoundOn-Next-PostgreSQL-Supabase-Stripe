@@ -28,7 +28,7 @@ const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
           fill
           priority
           src={image}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="250"
           alt="image"
         />
       </div>

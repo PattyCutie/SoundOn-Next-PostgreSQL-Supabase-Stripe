@@ -27,7 +27,7 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
         <Image
           fill
           priority
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="250"
           src={imageUrl || "/images/music-placeholder.png"}
           alt="MediaItem"
           className="object-cover"
