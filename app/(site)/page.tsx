@@ -1,18 +1,18 @@
-import getSongs from "@/action/getSongs"
-import Header from "@/components/Header"
-import ListItem from "@/components/ListItem"
-import PageContent from "./components/PageContent"
+import getSongs from "@/action/getSongs";
+import Header from "@/components/Header";
+import ListItem from "@/components/ListItem";
+import PageContent from "./components/PageContent";
 
 //This page has always up to date
-const revalidate = 60
+export const revalidate = 0;
 ////
 
 export default async function Home() {
   // after create action/getSong.ts
-  const songs = await getSongs()
+  const songs = await getSongs();
 
   return (
-    <div className="bg-neutral-900 rounded-lg h-full w-full overflow-x-hidden overflow-y-auto ">
+    <div className="bg-neutral-900 rounded-lg h-full w-full overflow-x-hidden overflow-y-auto">
       <Header>
         <div className="mb-2">
           <h1 className="text-white text-3xl font-semibold">Welcome back!</h1>
@@ -32,5 +32,5 @@ export default async function Home() {
         <PageContent songs={songs} />
       </div>
     </div>
-  )
+  );
 }

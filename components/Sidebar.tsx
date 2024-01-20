@@ -1,22 +1,25 @@
-"use client"
+"use client";
 
-import { usePathname } from "next/navigation"
-import { useMemo } from "react"
+import { usePathname } from "next/navigation";
+import { useMemo } from "react";
 // react icons
-import { HiHome, HiOutlineSearch } from "react-icons/hi"
-import Box from "./Box"
-import SidebarItem from "./SidebarItem"
-import Library from "./Library"
-import { Song } from "@/types"
+import { HiHome, HiOutlineSearch } from "react-icons/hi";
+import Box from "./Box";
+import SidebarItem from "./SidebarItem";
+import Library from "./Library";
+import { Song } from "@/types";
+import usePlayer from "@/hooks/usePlayer";
+import { twMerge } from "tailwind-merge";
 
 interface SidebarProps {
-  children: React.ReactNode
+  children: React.ReactNode;
   //add songs after create middleware and getSongByUserId action
-  songs: Song[]
+  songs: Song[];
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
-  const pathname = usePathname()
+  const player = usePlayer();
+  const pathname = usePathname();
   const routes = useMemo(
     () => [
       {
@@ -33,10 +36,14 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
       },
     ],
     [pathname]
-  )
+  );
 
   return (
-    <div className="flex h-full">
+    <div
+      className={twMerge(
+        `flex h-full`,
+        player.activeId && "h-[calc(100%-80px)]"
+      )}>
       <div className="hidden md:flex flex-col gap-y-2 bg-black h-full w-[300px] p-2">
         <Box>
           <div className="flex flex-col gap-y-4 px-5 py-4">
@@ -56,7 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
         {children}
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

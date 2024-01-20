@@ -1,23 +1,25 @@
-import useLoadImage from "@/hooks/useLoadImage"
-import { Song } from "@/types"
-import Image from "next/image"
-import React from "react"
+import useLoadImage from "@/hooks/useLoadImage";
+import usePlayer from "@/hooks/usePlayer";
+import { Song } from "@/types";
+import Image from "next/image";
 
 interface MediaItemProps {
-  data: Song
-  onClick?: (id: string) => void
+  data: Song;
+  onClick?: (id: string) => void;
 }
 const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
-  const imageUrl = useLoadImage(data)
+  const player = usePlayer();
+  const imageUrl = useLoadImage(data);
+
 
   const handleClick = () => {
     if (onClick) {
-      return onClick(data.id)
+      return onClick(data.id);
     }
 
     //Turn on Player !
-    return
-  }
+    return player.setId(data.id);
+  };
 
   return (
     <div
@@ -40,7 +42,7 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MediaItem
+export default MediaItem;

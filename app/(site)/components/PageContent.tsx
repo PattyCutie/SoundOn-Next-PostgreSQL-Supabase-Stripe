@@ -1,17 +1,17 @@
-"use client"
-import SongItem from "@/components/SongItem"
-import useOnPlay from "@/hooks/useOnPlay"
-import { Song } from "@/types"
+"use client";
+import SongItem from "@/components/SongItem";
+import useOnPlay from "@/hooks/useOnPlay";
+import { Song } from "@/types";
 
 interface PageContentProps {
-  songs: Song[]
+  songs: Song[];
 }
 
 const PageContent: React.FC<PageContentProps> = ({ songs }) => {
-  const onPlay = useOnPlay(songs)
+  const onPlay = useOnPlay(songs);
 
   if (songs.length === 0) {
-    return <div className="mt-4 text-neutral-400">No any songs available</div>
+    return <div className="mt-4 text-neutral-400">No any songs available</div>;
   }
 
   return (
@@ -24,7 +24,7 @@ const PageContent: React.FC<PageContentProps> = ({ songs }) => {
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default PageContent
+export default PageContent;
