@@ -38,7 +38,7 @@ const LikedContent: React.FC<LikedContentProps> = ({ songs }) => {
           className="flex items-center gap-x-4 w-full">
           <div className="flex-1">
             <MediaItem
-              onClick={(id) => onPlay(id)}
+              onClick={(id: string) => onPlay(id)}
               data={song}
             />
           </div>
