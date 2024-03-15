@@ -9,6 +9,7 @@ import ModalProvider from "@/providers/ModalProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
 import getSongByUserId from "@/action/getSongsByUserId";
 import Player from "@/components/Player";
+import getActiveProductWithPrice from "@/action/getActiveProductWithPrice";
 
 const font = Lexend({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const userSong = await getSongByUserId();
+  const products = await getActiveProductWithPrice();
 
   return (
     <html lang="en">
@@ -35,7 +37,7 @@ export default async function RootLayout({
         <ToasterProvider />
         <SupabaseProvider>
           <UserProvider>
-            <ModalProvider />
+            <ModalProvider products={products} />
             <Sidebar songs={userSong}>{children}</Sidebar>
             <Player />
           </UserProvider>
